@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace drinkClassLibrary
+namespace CoffeeShop
 {
     public class Store
     {
-        public List<Drink> drinkList { get; set; }
+        public List<Drink> DrinkList { get; set; }
         public List<Drink> ShoppingList { get; set; }
 
         public Store()
         {
-            drinkList = new List<Drink>();
+            DrinkList = new List<Drink>();
             ShoppingList = new List<Drink>();
         }
 
@@ -21,12 +21,12 @@ namespace drinkClassLibrary
         {
             decimal totalCost = 0;
 
-            foreach (var c in drinkList)
+            foreach (var c in DrinkList)
             {
                 totalCost += c.Price;
             }
 
-            drinkList.Clear();
+            DrinkList.Clear();
 
             return totalCost;
         }

@@ -1,34 +1,45 @@
-﻿using System;
-using System.Linq;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
-using drinkClassLibrary;
-
-namespace drinkShopConsoleApp
+﻿namespace CoffeeShop
 {
-    static class Program
+    class Program
     {
-        static void Main(string[] args)
+
+        delegate void Message();
+        static void Main()
         {
+            Message greet;
+            greet = Hello;
+            greet();
+
+            static void Hello() => Console.WriteLine("Hello, welcome to Coffee Shop");
+
+            List<string> drinks = new List<string>() { "Coffee", "Tea", "Water" };
+
+            foreach (var drink in drinks)
+            {
+                Console.WriteLine("We have " + drink + " " +
+                "press enter to continue");
+            }
+
+            Console.ReadLine();
             Store s = new Store();
 
-            Console.WriteLine("Welcome to the caffee. Please make your order");
+            int Action = ChooseAction();
 
-            int action = chooseAction();
-
-            while (action != 0)
+            while (Action != 0)
             {
-                Console.WriteLine("You chose " + action);
+                Console.WriteLine("You chose " + Action);
 
-                switch (action)
+                switch (Action)
                 {
-                    //add item
-                    case 1:
+                    //add item
+                    case 1:
                         Console.WriteLine("You chose to add a new drink");
                         string drinkMake = "";
                         string drinkSize = "";
                         decimal drinkPrice = 0;
+
+
+
 
                         Console.WriteLine("What is the drink make? Coffee, tea, water, etc ");
                         drinkMake = Console.ReadLine();
@@ -40,28 +51,32 @@ namespace drinkShopConsoleApp
                         drinkPrice = int.Parse(Console.ReadLine());
 
                         Drink newDrink = new Drink(drinkMake, drinkSize, drinkPrice);
-                        s.drinkList.Add(newDrink);
+                        s.DrinkList.Add(newDrink);
 
-                        printInventory(s);
+                        PrintInventory(s);
                         break;
 
-                    //add to 
-                    case 2:
+                    //add to 
+                    case 2:
                         Console.WriteLine("You chose to add a drink");
-                        printInventory(s);
+                        PrintInventory(s);
                         Console.WriteLine("Which item would you like to buy? (number)");
                         int drinkChosen = int.Parse(Console.ReadLine());
 
-                        s.ShoppingList.Add(s.drinkList[drinkChosen]);
+                        s.ShoppingList.Add(s.DrinkList[drinkChosen]);
 
-                        printShoppingCart(s);
+                        PrintShoppingCart(s);
 
                         break;
 
-                    //checkout
-                    case 3:
-                        printShoppingCart(s);
+                    //checkout
+                    case 3:
+                        PrintShoppingCart(s);
+                        string TeaColor = "green";
+
+
                         Console.WriteLine("The total cost of your items is : " + s.Checkout());
+                        Console.WriteLine("You have a present - " + TeaColor + " tea");
 
                         break;
 
@@ -69,13 +84,13 @@ namespace drinkShopConsoleApp
                         break;
                 }
 
-                action = chooseAction();
+                Action = ChooseAction();
             }
 
 
         }
 
-        private static void printShoppingCart(Store s)
+        private static void PrintShoppingCart(Store s)
         {
             Console.WriteLine("drinks you have chosen to buy ");
 
@@ -85,15 +100,15 @@ namespace drinkShopConsoleApp
             }
         }
 
-        private static void printInventory(Store s)
+        private static void PrintInventory(Store s)
         {
-            for (int i = 0; i < s.drinkList.Count; i++)
+            for (int i = 0; i < s.DrinkList.Count; i++)
             {
-                Console.WriteLine("drink # : " + i + " " + s.drinkList[i]);
+                Console.WriteLine("drink # : " + i + " " + s.DrinkList[i]);
             }
         }
 
-        static public int chooseAction()
+        static public int ChooseAction()
         {
             int choice = 0;
             Console.WriteLine("Choose an action (0) to quit (1) to add a new drink (2) add drink to drinkt (3) checkout");

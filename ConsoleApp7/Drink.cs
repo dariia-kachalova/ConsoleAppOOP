@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace drinkClassLibrary
+namespace CoffeeShop
 {
     public class Drink
     {
@@ -31,6 +31,19 @@ namespace drinkClassLibrary
             return "Make: " + Make + " Size: " + Size + " Price: $ " + Price;
 
         }
+
+    }
+
+    public class Tea : Drink
+    {
+        public string TeaColor { get; set; }
+
+        public Tea()
+        {
+            this.TeaColor = "green";
+        }
+
+            
 
     }
 }
