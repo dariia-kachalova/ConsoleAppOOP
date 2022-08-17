@@ -1,24 +1,40 @@
-﻿namespace CoffeeShop
+﻿using System.Collections;
+
+namespace CoffeeShop
 {
     class Program
     {
 
-        delegate void Message();
+        delegate void MyDelegate();
         static void Main()
         {
-            Message greet;
-            greet = Hello;
-            greet();
+            //Message greet;
+            //greet = Hello;
+            //greet();
 
-            static void Hello() => Console.WriteLine("Hello, welcome to Coffee Shop");
+            //static void Hello() => Console.WriteLine("Hello, welcome to Coffee Shop");
+            MyDelegate myDelegate = delegate { Console.WriteLine("Hello, welcome to Coffee Shop!"); };
+            myDelegate();
+
+
+
+
+
 
             List<string> drinks = new List<string>() { "Coffee", "Tea", "Water" };
 
-            foreach (var drink in drinks)
+            //foreach (var drink in drinks)
+            //{
+            //    Console.WriteLine("We have " + drink + " " +
+            //    "press enter to continue");
+            //}
+            IEnumerator drinksEnumerator = drinks.GetEnumerator();
+            while (drinksEnumerator.MoveNext())
             {
-                Console.WriteLine("We have " + drink + " " +
-                "press enter to continue");
+                string item = (string)drinksEnumerator.Current;
+                Console.WriteLine(item);
             }
+            drinksEnumerator.Reset();
 
             Console.ReadLine();
             Store s = new Store();
